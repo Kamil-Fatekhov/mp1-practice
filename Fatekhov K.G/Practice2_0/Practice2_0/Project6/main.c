@@ -1,28 +1,46 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "matrix.h"
-void main() {
-	int n,constant;
-	TMatrix* m1, * m2,*pcres1,*pcres2;
-	printf("input size of square matrix\t");
-	scanf_s("%d", &n);
+
+int main()
+{
+	TMatrix* m1, *m2, *res;
+	int n;
+
+	printf("enter matrix size\t");
+	scanf("%d", &n);
+
+	printf("enter the elements of the first matrix\n");
 	allocate_matrix(&m1, n);
-	allocate_matrix(&m2, n);
-	printf("input numbers of first matrix\n");
-	fill_matrix(m1);
+	fill_matrix(m1, n);
 	print_matrix(m1, n);
-	printf("input numbers of second matrix\n");
-	fill_matrix(m2);
+
+	printf("enter the elements of the second matrix\n");
+	allocate_matrix(&m2, n);
+	fill_matrix(m2, n);
 	print_matrix(m2, n);
-	printf("input const\n");
-	scanf_s("%d", &constant);
-	plus_const(m1,constant,n);
-	plus_const(m2,constant,n);
-	multiplied_const(m1, constant,n);
-	multiplied_const(m2, constant,n);
-	complition_matrix(m1, m2, n);
-	multiplication_matrix(m1, m2, n);
-	free(&m1);
-	free(&m2);
+
+	res = add_matrix(m1, m2, n);
+	printf("add_matrix result:\n");
+	print_matrix(res, n);
+	free_matrix(&res);
+
+	res = add_const(m1, 2);
+	printf("add_const result:\n");
+	print_matrix(res, n);
+	free_matrix(&res);
+
+	res = multi_const(m1, 2);
+	printf("multi_const result:\n");
+	print_matrix(res, n);
+	free_matrix(&res);
+
+	res = multi_matrix(m1, m2, n);
+	printf("multi_matrix result:\n");
+	print_matrix(res, n);
+	free_matrix(&res);
+
+	free_matrix(&m1);
+	free_matrix(&m2);
 	return 0;
 }
