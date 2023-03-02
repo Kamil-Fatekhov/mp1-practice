@@ -4,7 +4,7 @@
 
 typedef struct
 {
-	int* x;
+	float* x;
 	int n;    //number of elements in a column
 } TMatrix;
 
