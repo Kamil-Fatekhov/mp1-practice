@@ -15,7 +15,7 @@ void fill_matrix(TMatrix* matrix, int n)
 	for (; i < n; i++) {
 		int j = 0;
 		for (; j < n; j++) {
-			scanf("%d", &(matrix->x[i * n + j]));
+			scanf("%f", &(matrix->x[i * n + j]));
 		}
 	}
 	printf("\n");
@@ -28,7 +28,7 @@ void print_matrix(TMatrix* matrix, int n)
 	{
 		for (int i = 0; i < n; i++)
 		{
-			printf("%d ", matrix->x[j * n + i]);
+			printf("%f ", matrix->x[j * n + i]);
 		}
 		printf("\n");
 	}
