@@ -26,11 +26,10 @@ Shops::Shops() {
 	file.close();
 	return lines;
 }
- void print_class(Shops * shop) {
-	 for (int i = 0; i < shop->fileinf; i++) {
-		 shop[i].print();
-	 }
-}
+ ostream& operator<<(ostream& os, const Shops& shop) {
+	 os << "\nName: " << shop.name << "\nAdress: " << shop.adress << "\nPhone num: " << shop.phone_number << "\nSpecialization : " << shop.specialization << "\nOpening hours: " << shop.opening_hours << "\nOpening days: " << shop.opening_days << "\nForm of ownership: " << shop.form_of_ownership << endl;
+	 return os;
+ }
  
  Shops* info(int n, const string adress) {
 	 ifstream file(adress);
@@ -45,7 +44,7 @@ Shops::Shops() {
 
  void print_class(Shops* shop, int n) {
 	 for (int i = 0; i < n; i++) {
-		 shop[i].print();
+		 cout << shop[i];
 	 }
  }
  void Shops:: print() {
@@ -67,7 +66,16 @@ Shops::Shops() {
 	 this->form_of_ownership = other.form_of_ownership;
 	 return *this;
  }
-
+ int count(Shops* shop, int records) {
+	 int count = 0;
+	 const string str1 = "Products";
+	 const string str2 = "AllDay";
+	 for (int i = 0; i < records; i++) {
+		 if (((shop[i].specialization.compare(str1)) == 0) && ((shop[i].opening_hours.compare(str2)) == 0))
+			 count++;
+	 }
+	 return count;
+ }
  Shops* quantity(Shops* shop, int records) {
 	 int count = 0;
 	 const string str1 = "Products";
@@ -78,7 +86,6 @@ Shops::Shops() {
 	 }
 	 
 	 Shops* shops = new Shops[count];
-	 shops->fileinf = count;
 	 for (int j = 0; j < count; j++) {
 		 for (int i = 0; i < records; i++) {
 			 if (((shop[i].specialization.compare(str1)) == 0) && ((shop[i].opening_hours.compare(str2)) == 0)) {

@@ -6,8 +6,9 @@ int main() {
 	Shops* a = info(length, adress_base);
 	//print_class(a, length);
 	Shops* b = quantity(a, length);
+	int quantity = count(a, length);
 	cout << "Подходящие нам магазины: " << endl;
-	print_class(b, b->fileinf);
+	print_class(b, quantity);
 	delete[] a;
 	delete[] b;
 	return 0;
