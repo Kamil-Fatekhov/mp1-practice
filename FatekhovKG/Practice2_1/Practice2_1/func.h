@@ -6,13 +6,13 @@
 #include <string.h>
 #include <stdbool.h>
 typedef struct {
-	char name[30];
-	char adress[100];
-	char phone_number[100];
-	char specialization[100];
-	char opening_hours[60];
-	char opening_days[15];
-	char form_of_ownership[10];
+	char* name;
+	char* adress;
+	char* phone_number;
+	char* specialization;
+	char* opening_hours;
+	char* opening_days;
+	char* form_of_ownership;
 } Shop;
 int count_shops(FILE* filename, char* adress);
 void malloc_struct(Shop** shop, int length);
@@ -24,5 +24,6 @@ int* full_our_shop(Shop* shop, int records, int quantity);
 void print_name_struct(Shop* shop, int quantity, int* array);
 void malloc_array(int** array, int quantity);
 void free_array(int** array);
+void malloc_str(Shop* shop, int length);
 FILE* fileop(char* adress);
 #endif

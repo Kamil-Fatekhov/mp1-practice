@@ -12,6 +12,7 @@ int main() {
 	int length = count_shops(file, adress);
 	//printf("%d", length);
 	malloc_struct(&shop, length);
+	malloc_str(shop, length);
 	records = full_struct(shop, file, num);
 	print_struct(shop, records);
 	i = quantity(shop, records);

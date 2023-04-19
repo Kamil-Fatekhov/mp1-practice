@@ -14,6 +14,18 @@ int count_shops(FILE* filename, char* adress) {
 void malloc_struct(Shop** shop, int length) {
 	(*shop) = malloc(sizeof(Shop) * length);
 }
+void malloc_str(Shop* shop, int length) {
+	int i = 0;
+	for (i = 0; i < length; i++) {
+		shop[i].name = (char*)malloc(sizeof(char) * 30);
+		shop[i].adress = (char*)malloc(sizeof(char) * 99);
+		shop[i].phone_number = (char*)malloc(sizeof(char) * 99);
+		shop[i].specialization = (char*)malloc(sizeof(char) * 99);
+		shop[i].opening_hours = (char*)malloc(sizeof(char) * 59);
+		shop[i].opening_days = (char*)malloc(sizeof(char) * 14);
+		shop[i].form_of_ownership = (char*)malloc(sizeof(char) * 4);
+	}
+}
 int full_struct(Shop* shop, char* filename, int num) {
 	int read = 0;
 	int n = 0;
@@ -21,7 +33,7 @@ int full_struct(Shop* shop, char* filename, int num) {
 
 
 	do {
-		read = fscanf(filename, "%30[^,],%99[^,],%99[^,],%99[^,],%59[^,],%14[^,],%5[^,]\n", shop[records].name,
+		read = fscanf(filename, "%30[^,],%99[^,],%99[^,],%99[^,],%59[^,],%14[^,],%4[^,]\n", shop[records].name,
 			shop[records].adress, shop[records].phone_number, shop[records].specialization, shop[records].opening_hours,
 			shop[records].opening_days, shop[records].form_of_ownership);
 		if (read == num)  records++;
