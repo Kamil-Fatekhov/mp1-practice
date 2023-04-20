@@ -89,9 +89,11 @@ int* full_our_shop(Shop* shop, int records, int quantity) {
 	free(array);
 }
 void print_name_struct(Shop* shop, int quantity, int* array) {
-	printf("Suitable stores: ");
+	printf("\nSuitable stores: \n");
 	for (int i = 0; i < quantity; i++) {
-		printf("%s ", shop[array[i]].name);
+		printf("Name:\t%s\nAdress:\t%s\nPhone number:\t%s\nSpecialization:\t%s\nOpening hours:\t%s\nOpening days:\t%s\nForm of ownership:\t%s\n", shop[i].name,
+			shop[i].adress, shop[i].phone_number, shop[i].specialization, shop[i].opening_hours,
+			shop[i].opening_days, shop[i].form_of_ownership);
 	}
 }
 void malloc_array(int** array, int quantity) {
@@ -99,6 +101,21 @@ void malloc_array(int** array, int quantity) {
 }
 void free_array(int** array) {
 	free(*array);
+}
+Shop* our(Shop* shop, int quantity, int records) {
+	Shop* shops = (Shop*)malloc(sizeof(shop)*quantity);
+	const char* str1 = "Products";
+	const char* str2 = "AllDay";
+	int j = 0;
+	while (j < quantity) {
+		for (int i = 0; i < records; i++) {
+			if ((strcmp(shop[i].specialization, "Products") == 0) && (strcmp(shop[i].opening_hours, "AllDay")) == 0) {
+				shops[j] = shop[i];
+				j++;
+			}
+		}
+	}
+	return shops;
 }
 FILE* fileop(char* adress) {
 	FILE* filename = NULL;

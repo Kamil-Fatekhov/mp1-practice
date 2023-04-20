@@ -20,6 +20,7 @@ void free_struct(Shop** shop);
 int full_struct(Shop* shop, char* filename, int num);
 void print_struct(Shop* shop, int record);
 int quantity(Shop* shop, int records);
+Shop* our(Shop* shop, int quantity, int records);
 int* full_our_shop(Shop* shop, int records, int quantity);
 void print_name_struct(Shop* shop, int quantity, int* array);
 void malloc_array(int** array, int quantity);

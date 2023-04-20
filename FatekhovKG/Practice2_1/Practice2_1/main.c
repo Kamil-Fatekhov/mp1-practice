@@ -19,9 +19,13 @@ int main() {
 	malloc_array(&index, i);
 	//printf("Size %d\n", i);
 	index = full_our_shop(shop, records, i);
+	Shop* our_shop = our(shop, i, records);
+	printf("\nSituable stores: \n");
+	print_struct(our_shop, i);
 	//printf("SDS%d\t", index[2]);
-	print_name_struct(shop, i, index);
+	//print_name_struct(shop, i, index);
 	free_struct(&shop);
+	free_struct(&our_shop);
 	free_array(&index);
 
 	return 0;
