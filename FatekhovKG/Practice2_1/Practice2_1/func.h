@@ -7,13 +7,33 @@
 #include <stdbool.h>
 typedef struct {
 	char* name;
-	char* adress;
 	char* phone_number;
 	char* specialization;
-	char* opening_hours;
-	char* opening_days;
+	Opening_Hours* op;
+	Adress adress;
 	char* form_of_ownership;
 } Shop;
+typedef struct {
+	int hours;
+	int minutes;
+} Time;
+typedef struct {
+	char* street;
+	char* postcode;
+}Adress;
+typedef struct {
+	enum Days {
+		Monday,
+		Tuesday,
+		Wednesday,
+		Thursday,
+		Friday,
+		Saturday,
+		Sunday
+	};
+	Time open;
+	Time close;
+}Opening_Hours;
 int count_shops(FILE* filename, char* adress);
 void malloc_struct(Shop** shop, int length);
 void free_struct(Shop** shop);
