@@ -5,6 +5,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+typedef enum {
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+}Days;
 typedef struct {
 	char* name;
 	char* phone_number;
@@ -14,23 +23,15 @@ typedef struct {
 	char* form_of_ownership;
 } Shop;
 typedef struct {
-	int hours;
-	int minutes;
+	char hours[7];
+	char minutes[7];
 } Time;
 typedef struct {
 	char* street;
 	char* postcode;
 }Adress;
 typedef struct {
-	enum Days {
-		Monday,
-		Tuesday,
-		Wednesday,
-		Thursday,
-		Friday,
-		Saturday,
-		Sunday
-	};
+	Days* s;
 	Time open;
 	Time close;
 }Opening_Hours;
@@ -48,3 +49,4 @@ void free_array(int** array);
 void malloc_str(Shop* shop, int length);
 FILE* fileop(char* adress);
 #endif
+
