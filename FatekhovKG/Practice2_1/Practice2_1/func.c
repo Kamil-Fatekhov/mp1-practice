@@ -8,7 +8,7 @@ int count_shops(FILE* filename, char* adress) {
 			lines_count++;
 	}
 	fclose(filename);
-	return lines_count-1;
+	return lines_count;
 
 }
 FILE* fileop(char* adress) {
@@ -37,12 +37,11 @@ Shop* our_shop(char* adress, int length) {
 	 shop[i].adress.street = (char*)malloc(sizeof(char) * 30);
 	 shop[i].op = (Opening_Hours*)malloc(sizeof(Opening_Hours) * 7);
 	 shop[i].form_of_ownership = (char*)malloc(sizeof(char) * 30);
-	 shop[i].op->s = (Days*)malloc(sizeof(Days) * 7);
-	 shop[i].op->open.minutes = (char*)malloc(sizeof(char) * 10);
-	 shop[i].op->close.minutes = (char*)malloc(sizeof(char) * 10);
-	 shop[i].op->open.hours = (char*)malloc(sizeof(char) * 10);
-	 shop[i].op->close.hours = (char*)malloc(sizeof(char) * 10);
-	 fscanf(filename, "%s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %s %s",shop[i].name,shop[i].adress.street,shop[i].phone_number,shop[i].specialization, &shop[i].op->s[Monday], &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday],&shop[i].op->close.minutes[Monday], &shop[i].op->s[1], &shop[i].op->open.hours[Tuesday], &shop[i].op->open.minutes[Tuesday], &shop[i].op->close.hours[Tuesday], &shop[i].op->close.minutes[Tuesday], &shop[i].op->s[2], &shop[i].op->open.hours[Wednesday], &shop[i].op->open.minutes[Wednesday], &shop[i].op->close.hours[Wednesday], &shop[i].op->close.minutes[Wednesday], &shop[i].op->s[3], &shop[i].op->open.hours[Thursday], &shop[i].op->open.minutes[Thursday], &shop[i].op->close.hours[Thursday], &shop[i].op->close.minutes[Thursday], &shop[i].op->s[4], &shop[i].op->open.hours[Friday], &shop[i].op->open.minutes[Friday], &shop[i].op->close.hours[Friday], &shop[i].op->close.minutes[Friday], &shop[i].op->s[5], &shop[i].op->open.hours[Saturday], &shop[i].op->open.minutes[Saturday], &shop[i].op->close.hours[Saturday],& shop[i].op->close.minutes[Saturday], &shop[i].op->s[6], &shop[i].op->open.hours[Sunday], &shop[i].op->open.minutes[Sunday], &shop[i].op->close.hours[Sunday], &shop[i].op->close.minutes[Sunday], shop[i].form_of_ownership, shop[i].adress.postcode);
+	 shop[i].op->open.minutes = (int*)malloc(sizeof(int) * 10);
+	 shop[i].op->close.minutes = (int*)malloc(sizeof(int) * 10);
+	 shop[i].op->open.hours = (int*)malloc(sizeof(int) * 10);
+	 shop[i].op->close.hours = (int*)malloc(sizeof(int) * 10);
+	 fscanf(filename, "%s %s %s %s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %s %s",shop[i].name,shop[i].adress.street,shop[i].phone_number,shop[i].specialization, shop[i].op[Monday].s, shop[i].op[Monday].open.hours, shop[i].op[Monday].open.minutes, shop[i].op[Monday].close.hours, shop[i].op[Monday].close.minutes, shop[i].op[Tuesday].s, shop[i].op[Tuesday].open.hours, shop[i].op[Tuesday].open.minutes, shop[i].op[Tuesday].close.hours, shop[i].op[Tuesday].close.minutes, shop[i].op[Wednesday].s, shop[i].op[Wednesday].open.hours, shop[i].op[Wednesday].open.minutes, shop[i].op[Wednesday].close.hours, shop[i].op[Wednesday].close.minutes, shop[i].op[Thursday].s, shop[i].op[Thursday].open.hours, shop[i].op[Thursday].open.minutes, shop[i].op[Thursday].close.hours, shop[i].op[Thursday].close.minutes, shop[i].op[Friday].s, shop[i].op[Friday].open.hours, shop[i].op[Friday].open.minutes, shop[i].op[Friday].close.hours, shop[i].op[Friday].close.minutes, shop[i].op[Saturday].s, shop[i].op[Saturday].open.hours, shop[i].op[Saturday].open.minutes, shop[i].op[Saturday].close.hours, shop[i].op[Saturday].close.minutes, shop[i].op[Sunday].s, shop[i].op[Sunday].open.hours, shop[i].op[Sunday].open.minutes, shop[i].op[Sunday].close.hours, shop[i].op[Sunday].close.minutes, shop[i].form_of_ownership, shop[i].adress.postcode);
  }
 	 fclose(filename);
  return shop;
@@ -51,27 +50,27 @@ void print_struct(Shop* shop, int length) {
 	for (int i = 0; i < length; i++) {
 			printf("Name: %s\nAdress: %s\nPhone Number: %s\nSpecialization: %s\nPostcode: %s\nForm of ownership:%s\n",shop[i].name,shop[i].adress.street,shop[i].phone_number,shop[i].specialization,shop[i].adress.postcode,shop[i].form_of_ownership);
 		for (int j = 0; j < 7; j++) {
-			switch (shop[i].op->s[j]) {
+			switch (shop[i].op[j].s) {
 			case 0:
-				printf("Monday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday], &shop[i].op->close.minutes[Monday]);
+				printf("Monday: %d:%d-%d:%d\n", shop[i].op[Monday].open.hours, shop[i].op[Monday].open.minutes, shop[i].op[Monday].close.hours, shop[i].op[Monday].close.minutes);
 				break;
 			case 1:
-				printf("Tuesday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Tuesday], &shop[i].op->open.minutes[Tuesday], &shop[i].op->close.hours[Tuesday], &shop[i].op->close.minutes[Tuesday]);
+				printf("Tuesday: %d:%d-%d:%d\n", shop[i].op[Tuesday].open.hours, shop[i].op[Tuesday].open.minutes, shop[i].op[Tuesday].close.hours, shop[i].op[Tuesday].close.minutes);
 				break;
 			case 2:
-				printf("Wednesday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Wednesday], &shop[i].op->open.minutes[Wednesday], &shop[i].op->close.hours[Wednesday], &shop[i].op->close.minutes[Wednesday]);
+				printf("Wednesday: %d:%d-%d:%d\n", shop[i].op[Wednesday].open.hours, shop[i].op[Wednesday].open.minutes, shop[i].op[Wednesday].close.hours, shop[i].op[Wednesday].close.minutes);
 				break;
 			case 3:
-				printf("Thursday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Thursday], &shop[i].op->open.minutes[Thursday], &shop[i].op->close.hours[Thursday], &shop[i].op->close.minutes[Thursday]);
+				printf("Thursday: %d:%d-%d:%d\n", shop[i].op[Thursday].open.hours, shop[i].op[Thursday].open.minutes, shop[i].op[Thursday].close.hours, shop[i].op[Thursday].close.minutes);
 				break;
 			case 4:
-				printf("Friday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday], &shop[i].op->close.minutes[Monday]);
+				printf("Friday: %d:%d-%d:%d\n", shop[i].op[Friday].open.hours, shop[i].op[Friday].open.minutes, shop[i].op[Friday].close.hours, shop[i].op[Friday].close.minutes);
 				break;
 			case 5:
-				printf("Saturday: %s:%s-%s:%s\n", &shop[i].op->open.hours[5], &shop[i].op->open.minutes[5], &shop[i].op->close.hours[5], &shop[i].op->close.minutes[5]);
+				printf("Saturday: %d:%d-%d:%d\n", shop[i].op[Saturday].open.hours, shop[i].op[Saturday].open.minutes, shop[i].op[Saturday].close.hours, shop[i].op[Saturday].close.minutes);
 				break;
 			case 6:
-				printf("Sunday: %s:%s-%s:%s\n", &shop[i].op->open.hours[6], &shop[i].op->open.minutes[6], &shop[i].op->close.hours[6], &shop[i].op->close.minutes[6]);
+				printf("Sunday: %d:%d-%d:%d\n", shop[i].op[Sunday].open.hours, shop[i].op[Sunday].open.minutes, shop[i].op[Sunday].close.hours, shop[i].op[Sunday].close.minutes);
 				break;
 			}
 		}
