@@ -1,6 +1,6 @@
 #include "func.h"
 int count_shops(FILE* filename, char* adress) {
-	int vacancy_count = 0, lines_count = 1;
+	int vacancy_count = 0, lines_count = 0;
 	filename = fopen(adress, "r");
 	while (!feof(filename))
 	{
@@ -8,115 +8,8 @@ int count_shops(FILE* filename, char* adress) {
 			lines_count++;
 	}
 	fclose(filename);
-	return lines_count;
+	return lines_count-1;
 
-}
-void malloc_struct(Shop** shop, int length) {
-	(*shop) = malloc(sizeof(Shop) * length);
-}
-void malloc_str(Shop* shop, int length,Opening_Hours* op) {
-	int i = 0;
-	for (i = 0; i < length; i++) {
-		shop[i].name = (char*)malloc(sizeof(char) * 30);
-		shop[i].adress.postcode = (char*)malloc(sizeof(char) * 99);
-		shop[i].adress.street = (char*)malloc(sizeof(char) * 99);
-		shop[i].phone_number = (char*)malloc(sizeof(char) * 99);
-		shop[i].specialization = (char*)malloc(sizeof(char) * 99);
-		shop[i].form_of_ownership = (char*)malloc(sizeof(char) * 4);
-		shop[i].op = (Opening_Hours*)malloc(sizeof(Opening_Hours) * 7);	
-		op->s = (Days*)malloc(sizeof(Days) * 7);
-		
-	}
-}
-int full_struct(Shop* shop, char* filename, int num) {
-	int read = 0;
-	int n = 0;
-	int records = 0;
-
-
-	do {
-		read = fscanf(filename, "%30[^,],%99[^,],%99[^,],%99[^,],%59[^,],%4[^,]\n", shop[records].name,
-			shop[records].adress.street, shop[records].adress.postcode, shop[records].phone_number, shop[records].specialization, shop[records].form_of_ownership);
-		if (read == num)  records++;
-		if (read != num && !feof(filename))
-		{
-			printf("File format incorrect.\n");
-			return 1;
-		}
-		if (ferror(filename)) {
-			printf("Error reading file.\n");
-			return 1;
-		}
-		read = 0;
-	} while (!feof(filename));
-	fclose(filename);
-	printf("\n%d records read.\n\n", records);
-	return records;
-}
-void print_struct(Shop* shop, int record) {
-	int records = record;
-	for (int i = 0; i < record; i++) {
-		printf("Name:\t%s\nAdress:\t%s\nPhone number:\t%s\nSpecialization:\t%s\nOpening hours:\t%s\nOpening days:\t%s\nForm of ownership:\t%s\n", shop[i].name,
-			shop[i].adress, shop[i].phone_number, shop[i].specialization, shop[i].opening_hours,
-			shop[i].opening_days, shop[i].form_of_ownership);
-	}
-}
-void free_struct(Shop** shop) {
-	free(*shop);
-}
-int quantity(Shop* shop, int records) {
-	int count = 0;
-	char a[10] = "Products";
-	char b[10] = "AllDay";
-	for (int i = 0; i < records; i++) {
-
-		if ((strcmp(shop[i].specialization, "Products") == 0) && (strcmp(shop[i].opening_hours, "AllDay")) == 0)
-			count++;
-		//printf("str %d, %d\n", strcmp(shop[i].specialization, "Products"), strcmp(shop[i].opening_hours, "AllDay"));
-	}
-	return count;
-}
-int* full_our_shop(Shop* shop, int records, int quantity) {
-	int* array;
-	malloc_array(&array, quantity);
-	int i = 0, j = 0;
-	while (i < records && j < quantity) {
-		if ((strcmp(shop[i].specialization, "Products") == 0) && (strcmp(shop[i].opening_hours, "AllDay")) == 0) {
-			array[j] = i;
-			j++;
-		}i++;
-	}
-	return array;
-	free(array);
-}
-void print_name_struct(Shop* shop, int quantity, int* array) {
-	printf("\nSuitable stores: \n");
-	for (int i = 0; i < quantity; i++) {
-		printf("Name:\t%s\nAdress:\t%s\nPhone number:\t%s\nSpecialization:\t%s\nOpening hours:\t%s\nOpening days:\t%s\nForm of ownership:\t%s\n", shop[i].name,
-			shop[i].adress, shop[i].phone_number, shop[i].specialization, shop[i].opening_hours,
-			shop[i].opening_days, shop[i].form_of_ownership);
-	}
-}
-void malloc_array(int** array, int quantity) {
-	*array = (int*)malloc(sizeof(int) * quantity);
-}
-void free_array(int** array) {
-	free(*array);
-}
-Shop* our(Shop* shop, int quantity, int records) {
-	Shop* shops = (Shop*)malloc(sizeof(shop)*quantity);
-	const char* str1 = "Products";
-	const char* str2 = "AllDay";
-	int j = 0;
-	while (j < quantity) {
-		for (int i = 0; i < records; i++) {
-			if ((strcmp(shop[i].specialization, "Products") == 0) && (strcmp(shop[i].opening_hours, "AllDay")) == 0) {
-				shops[j] = shop[i];
-				j++;
-			}
-		}
-	}
-	return shops;
 }
 FILE* fileop(char* adress) {
 	FILE* filename = NULL;
@@ -129,4 +22,58 @@ FILE* fileop(char* adress) {
 	else
 		printf("file opened successfully\n");
 	return filename;
+}
+Shop* our_shop(char* adress, int length) {
+	FILE* filename;
+	filename = fopen(adress, "r");
+	Shop* shop=(Shop*)malloc(sizeof(Shop) * length);
+	int read = 0;
+ int j = 0;
+ for (int i = 0; i < length; i++) {
+	 shop[i].name = (char*)malloc(sizeof(char) * 30);
+	 shop[i].adress.postcode = (char*)malloc(sizeof(char) * 30);
+	 shop[i].specialization = (char*)malloc(sizeof(char) * 30);
+	 shop[i].phone_number = (char*)malloc(sizeof(char) * 30);
+	 shop[i].adress.street = (char*)malloc(sizeof(char) * 30);
+	 shop[i].op = (Opening_Hours*)malloc(sizeof(Opening_Hours) * 7);
+	 shop[i].form_of_ownership = (char*)malloc(sizeof(char) * 30);
+	 shop[i].op->s = (Days*)malloc(sizeof(Days) * 7);
+	 shop[i].op->open.minutes = (char*)malloc(sizeof(char) * 10);
+	 shop[i].op->close.minutes = (char*)malloc(sizeof(char) * 10);
+	 shop[i].op->open.hours = (char*)malloc(sizeof(char) * 10);
+	 shop[i].op->close.hours = (char*)malloc(sizeof(char) * 10);
+	 fscanf(filename, "%s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %d %s %s %s %s %s %s",shop[i].name,shop[i].adress.street,shop[i].phone_number,shop[i].specialization, &shop[i].op->s[Monday], &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday],&shop[i].op->close.minutes[Monday], &shop[i].op->s[1], &shop[i].op->open.hours[Tuesday], &shop[i].op->open.minutes[Tuesday], &shop[i].op->close.hours[Tuesday], &shop[i].op->close.minutes[Tuesday], &shop[i].op->s[2], &shop[i].op->open.hours[Wednesday], &shop[i].op->open.minutes[Wednesday], &shop[i].op->close.hours[Wednesday], &shop[i].op->close.minutes[Wednesday], &shop[i].op->s[3], &shop[i].op->open.hours[Thursday], &shop[i].op->open.minutes[Thursday], &shop[i].op->close.hours[Thursday], &shop[i].op->close.minutes[Thursday], &shop[i].op->s[4], &shop[i].op->open.hours[Friday], &shop[i].op->open.minutes[Friday], &shop[i].op->close.hours[Friday], &shop[i].op->close.minutes[Friday], &shop[i].op->s[5], &shop[i].op->open.hours[Saturday], &shop[i].op->open.minutes[Saturday], &shop[i].op->close.hours[Saturday],& shop[i].op->close.minutes[Saturday], &shop[i].op->s[6], &shop[i].op->open.hours[Sunday], &shop[i].op->open.minutes[Sunday], &shop[i].op->close.hours[Sunday], &shop[i].op->close.minutes[Sunday], shop[i].form_of_ownership, shop[i].adress.postcode);
+ }
+	 fclose(filename);
+ return shop;
+ }
+void print_struct(Shop* shop, int length) {
+	for (int i = 0; i < length; i++) {
+			printf("Name: %s\nAdress: %s\nPhone Number: %s\nSpecialization: %s\nPostcode: %s\nForm of ownership:%s\n",shop[i].name,shop[i].adress.street,shop[i].phone_number,shop[i].specialization,shop[i].adress.postcode,shop[i].form_of_ownership);
+		for (int j = 0; j < 7; j++) {
+			switch (shop[i].op->s[j]) {
+			case 0:
+				printf("Monday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday], &shop[i].op->close.minutes[Monday]);
+				break;
+			case 1:
+				printf("Tuesday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Tuesday], &shop[i].op->open.minutes[Tuesday], &shop[i].op->close.hours[Tuesday], &shop[i].op->close.minutes[Tuesday]);
+				break;
+			case 2:
+				printf("Wednesday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Wednesday], &shop[i].op->open.minutes[Wednesday], &shop[i].op->close.hours[Wednesday], &shop[i].op->close.minutes[Wednesday]);
+				break;
+			case 3:
+				printf("Thursday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Thursday], &shop[i].op->open.minutes[Thursday], &shop[i].op->close.hours[Thursday], &shop[i].op->close.minutes[Thursday]);
+				break;
+			case 4:
+				printf("Friday: %s:%s-%s:%s\n", &shop[i].op->open.hours[Monday], &shop[i].op->open.minutes[Monday], &shop[i].op->close.hours[Monday], &shop[i].op->close.minutes[Monday]);
+				break;
+			case 5:
+				printf("Saturday: %s:%s-%s:%s\n", &shop[i].op->open.hours[5], &shop[i].op->open.minutes[5], &shop[i].op->close.hours[5], &shop[i].op->close.minutes[5]);
+				break;
+			case 6:
+				printf("Sunday: %s:%s-%s:%s\n", &shop[i].op->open.hours[6], &shop[i].op->open.minutes[6], &shop[i].op->close.hours[6], &shop[i].op->close.minutes[6]);
+				break;
+			}
+		}
+	}
 }
