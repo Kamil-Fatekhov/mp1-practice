@@ -6,8 +6,10 @@ void main() {
 	int length = count_shops(file,adress);
 	Shop* shop = our_shop(adress, length);
 	print_struct(shop, length);
-	shop[0].op[0].open.hours = "00";
-	printf("%s", shop[0].op[0].open.hours);
+	int count = count_shop(shop, length);
+	printf("\nOur shops: \n");
+	Shop* our = correct_shop(shop, length,count);
+	print_struct(our, count);
 	
 }
 
