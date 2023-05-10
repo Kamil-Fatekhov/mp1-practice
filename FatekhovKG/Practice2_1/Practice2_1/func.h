@@ -16,8 +16,8 @@ typedef enum {
 }Days;
 FILE* fileop(char* adress);
 typedef struct {
-	int* hours;
-	int* minutes;
+	int hours;
+	int minutes;
 } Time;
 typedef struct {
 	Days s;
@@ -39,6 +39,9 @@ typedef struct {
 int count_shops(FILE* filename, char* adress);
 void print_struct(Shop* shop, int length);
 Shop* our_shop(char* adress, int length);
+Shop* correct_shop(Shop* shops, int length, int count); 
+int count_shop(Shop* shops, int length);
+free_str(Shop** shop, int length);
 #endif
 
 
