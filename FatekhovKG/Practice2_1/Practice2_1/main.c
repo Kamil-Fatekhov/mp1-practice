@@ -10,6 +10,7 @@ void main() {
 	printf("\nOur shops: \n");
 	Shop* our = correct_shop(shop, length,count);
 	print_struct(our, count);
-	
+	free_str(&shop, length);
+	free_str(&our, count);
 }
 
