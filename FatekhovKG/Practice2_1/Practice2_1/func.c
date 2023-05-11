@@ -38,7 +38,17 @@ Shop* our_shop(char* adress, int length) {
 		shop[i].op = (Opening_Hours*)malloc(sizeof(Opening_Hours) * length * 7);
 		shop[i].form_of_ownership = (char*)malloc(sizeof(char) * 30);
 
-		fscanf(filename, "%s %s %s %s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %s %s", shop[i].name, shop[i].adress.street, shop[i].phone_number, shop[i].specialization, &shop[i].op[Monday].s, &shop[i].op[Monday].open.hours, &shop[i].op[Monday].open.minutes, &shop[i].op[Monday].close.hours, &shop[i].op[Monday].close.minutes, &shop[i].op[Tuesday].s, &shop[i].op[Tuesday].open.hours, &shop[i].op[Tuesday].open.minutes, &shop[i].op[Tuesday].close.hours, &shop[i].op[Tuesday].close.minutes, &shop[i].op[Wednesday].s, &shop[i].op[Wednesday].open.hours, &shop[i].op[Wednesday].open.minutes, &shop[i].op[Wednesday].close.hours, &shop[i].op[Wednesday].close.minutes, &shop[i].op[Thursday].s, &shop[i].op[Thursday].open.hours, &shop[i].op[Thursday].open.minutes, &shop[i].op[Thursday].close.hours, &shop[i].op[Thursday].close.minutes, &shop[i].op[Friday].s, &shop[i].op[Friday].open.hours, &shop[i].op[Friday].open.minutes, &shop[i].op[Friday].close.hours, &shop[i].op[Friday].close.minutes, &shop[i].op[Saturday].s, &shop[i].op[Saturday].open.hours, &shop[i].op[Saturday].open.minutes, &shop[i].op[Saturday].close.hours, &shop[i].op[Saturday].close.minutes, &shop[i].op[Sunday].s, &shop[i].op[Sunday].open.hours, &shop[i].op[Sunday].open.minutes, &shop[i].op[Sunday].close.hours, &shop[i].op[Sunday].close.minutes, shop[i].form_of_ownership, shop[i].adress.postcode);
+		fscanf(filename, "%s %s %s %s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %s %s",
+			shop[i].name, shop[i].adress.street, shop[i].phone_number, shop[i].specialization, &shop[i].op[Monday].s,
+			&shop[i].op[Monday].open.hours, &shop[i].op[Monday].open.minutes, &shop[i].op[Monday].close.hours,
+			&shop[i].op[Monday].close.minutes, &shop[i].op[Tuesday].s, &shop[i].op[Tuesday].open.hours, &shop[i].op[Tuesday].open.minutes, 
+			&shop[i].op[Tuesday].close.hours, &shop[i].op[Tuesday].close.minutes, &shop[i].op[Wednesday].s, &shop[i].op[Wednesday].open.hours,
+			&shop[i].op[Wednesday].open.minutes, &shop[i].op[Wednesday].close.hours, &shop[i].op[Wednesday].close.minutes, &shop[i].op[Thursday].s,
+			&shop[i].op[Thursday].open.hours, &shop[i].op[Thursday].open.minutes, &shop[i].op[Thursday].close.hours, &shop[i].op[Thursday].close.minutes,
+			&shop[i].op[Friday].s, &shop[i].op[Friday].open.hours, &shop[i].op[Friday].open.minutes, &shop[i].op[Friday].close.hours, &shop[i].op[Friday].close.minutes,
+			&shop[i].op[Saturday].s, &shop[i].op[Saturday].open.hours, &shop[i].op[Saturday].open.minutes, &shop[i].op[Saturday].close.hours,
+			&shop[i].op[Saturday].close.minutes, &shop[i].op[Sunday].s, &shop[i].op[Sunday].open.hours, &shop[i].op[Sunday].open.minutes,
+			&shop[i].op[Sunday].close.hours, &shop[i].op[Sunday].close.minutes, shop[i].form_of_ownership, shop[i].adress.postcode);
 	}
 
 	fclose(filename);
