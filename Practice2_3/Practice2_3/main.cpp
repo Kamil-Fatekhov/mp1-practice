@@ -1,15 +1,11 @@
 #include "title.h"
-int main() {
-	setlocale(LC_ALL, "RU");
-	const string adress_base = "shops.txt";
-	int length = file_info(adress_base);
-	Shops* a = info(length, adress_base);
-	//print_class(a, length);
-	Shops* b = quantity(a, length);
-	int quantity = count(a, length);
-	cout << "Подходящие нам магазины: " << endl;
-	print_class(b, quantity);
-	delete[] a;
-	delete[] b;
-	return 0;
+void main() {
+	string adress = "shops.txt";
+	List a(adress);
+	//a.shop[0] = a.shop[1];
+	cout << a<<endl;
+	cout << "Our shops: " << endl;
+	List b;
+	b = a.correct_base();
+	cout << b;
 }
