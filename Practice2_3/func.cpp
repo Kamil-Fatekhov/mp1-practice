@@ -1,7 +1,7 @@
 #include "title.h"
 Adress::Adress() {
-	 street = " ";
-	 postcode = " ";
+	street = " ";
+	postcode = " ";
 }
 Opening_Hours::Opening_Hours() {
 	Day = " ";
@@ -18,14 +18,14 @@ List::List() {
 	shop[0] = Shop();
 }
 List::Shop::Shop() {
-	 name = " ";
-	 phone_number = " ";
-	 specialization = " ";
-	 op = new Opening_Hours[7];
-	 for(int i=0; i<7;i++)
-	 op[i] = Opening_Hours();
-	 form_of_ownership = " ";
-	 adress = Adress();
+	name = " ";
+	phone_number = " ";
+	specialization = " ";
+	op = new Opening_Hours[7];
+	for (int i = 0; i < 7; i++)
+		op[i] = Opening_Hours();
+	form_of_ownership = " ";
+	adress = Adress();
 }
 List::List(string adress) {
 	ifstream base(adress);
@@ -44,22 +44,22 @@ List::List(string adress) {
 	}
 	base.seekg(0);
 	this->count = count;
-	 shop = new Shop[this->count];
-	 for (int j = 0; j < this->count; j++) 
-		 shop[j].op = new Opening_Hours[7];
-	 for (int i = 0; i < this->count; i++)
-	 {
-		 base >> shop[i].name >> shop[i].adress.street >> shop[i].phone_number >> shop[i].specialization >> shop[i].op[0].Day >> shop[i].op[0].open.hours
-			 >> shop[i].op[0].open.minutes >> shop[i].op[0].close.hours >> shop[i].op[0].close.minutes >> shop[i].op[1].Day >>shop[i].op[1].open.hours >>
-			 shop[i].op[1].open.minutes >> shop[i].op[1].close.hours >> shop[i].op[1].close.minutes >> shop[i].op[2].Day >> shop[i].op[2].open.hours >>
-			 shop[i].op[2].open.minutes >> shop[i].op[2].close.hours >> shop[i].op[2].close.minutes >> shop[i].op[3].Day >> shop[i].op[3].open.hours >>
-			 shop[i].op[3].open.minutes >> shop[i].op[3].close.hours >> shop[i].op[3].close.minutes >> shop[i].op[4].Day >> shop[i].op[4].open.hours >>
-			 shop[i].op[4].open.minutes >> shop[i].op[4].close.hours >> shop[i].op[4].close.minutes >> shop[i].op[5].Day >> shop[i].op[5].open.hours >>
-			 shop[i].op[5].open.minutes >> shop[i].op[5].close.hours >> shop[i].op[5].close.minutes >> shop[i].op[6].Day >> shop[i].op[6].open.hours >>
-			 shop[i].op[6].open.minutes >> shop[i].op[6].close.hours >> shop[i].op[6].close.minutes >> shop[i].form_of_ownership >> shop[i].adress.postcode;
+	shop = new Shop[this->count];
+	for (int j = 0; j < this->count; j++)
+		shop[j].op = new Opening_Hours[7];
+	for (int i = 0; i < this->count; i++)
+	{
+		base >> shop[i].name >> shop[i].adress.street >> shop[i].phone_number >> shop[i].specialization >> shop[i].op[0].Day >> shop[i].op[0].open.hours
+			>> shop[i].op[0].open.minutes >> shop[i].op[0].close.hours >> shop[i].op[0].close.minutes >> shop[i].op[1].Day >> shop[i].op[1].open.hours >>
+			shop[i].op[1].open.minutes >> shop[i].op[1].close.hours >> shop[i].op[1].close.minutes >> shop[i].op[2].Day >> shop[i].op[2].open.hours >>
+			shop[i].op[2].open.minutes >> shop[i].op[2].close.hours >> shop[i].op[2].close.minutes >> shop[i].op[3].Day >> shop[i].op[3].open.hours >>
+			shop[i].op[3].open.minutes >> shop[i].op[3].close.hours >> shop[i].op[3].close.minutes >> shop[i].op[4].Day >> shop[i].op[4].open.hours >>
+			shop[i].op[4].open.minutes >> shop[i].op[4].close.hours >> shop[i].op[4].close.minutes >> shop[i].op[5].Day >> shop[i].op[5].open.hours >>
+			shop[i].op[5].open.minutes >> shop[i].op[5].close.hours >> shop[i].op[5].close.minutes >> shop[i].op[6].Day >> shop[i].op[6].open.hours >>
+			shop[i].op[6].open.minutes >> shop[i].op[6].close.hours >> shop[i].op[6].close.minutes >> shop[i].form_of_ownership >> shop[i].adress.postcode;
 
-	 }
-	 base.close();
+	}
+	base.close();
 }
 ostream& operator<<(ostream& os, const List& list) {
 	for (int j = 0; j < list.count; j++) {
@@ -155,7 +155,7 @@ List List::correct_base() {
 			}
 		}
 	}
-		return list;
+	return list;
 }
 List& List::operator=(const List& other)
 {
@@ -169,4 +169,3 @@ List& List::operator=(const List& other)
 		this->shop[i] = other.shop[i];
 	return *this;
 }
- 
