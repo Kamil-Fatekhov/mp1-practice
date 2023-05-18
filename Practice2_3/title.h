@@ -51,7 +51,7 @@ private:
 class List {
 public:
 	List& operator=(const List& other);
-	
+
 	friend ostream& operator<<(ostream& os, const List& list);
 	List();
 	List(const List& other);
@@ -64,7 +64,7 @@ private:
 
 	class Shop {
 		friend class List;
-		
+
 	public:
 		Shop& operator =(const Shop& other);
 		Shop();
